@@ -1,0 +1,104 @@
+<< User-Interaction >>
+{
+	"type": "record",
+	"name": "Interactions",
+	"namespace": "com.amazonaws.personalize.schema",
+	"fields": [
+		{
+			"name": "USER_ID",
+			"type": "string"
+		},
+		{
+			"name": "ITEM_ID",
+			"type": "string"
+		},
+		{
+			"name": "RATING",
+			"type": "string"
+		},
+		{
+			"name": "TIMESTAMP",
+			"type": "long"
+		}
+	],
+	"version": "1.0"
+}
+
+<< User-Data >>
+
+{
+	"type": "record",
+	"name": "Users",
+	"namespace": "com.amazonaws.personalize.schema",
+	"fields": [
+		{
+			"name": "USER_ID",
+			"type": "string"
+		},
+		{
+			"name": "MOVIE_ID",
+			"type": "int"
+		},
+		{
+			"name": "TIMESTAMP",
+			"type": "string"
+		}
+	],
+	"version": "1.0"
+}
+
+<< Item-data >>
+
+{
+	"type": "record",
+	"name": "Items",
+	"namespace": "com.amazonaws.personalize.schema",
+	"fields": [
+		{
+			"name": "ITEM_ID",
+			"type": "string"
+		},
+		{
+			"name": "TITLE",
+			"type": [
+				"null",
+				"string"
+			],
+			"categorical": true
+		},
+		{
+			"name": "GENRE",
+			"type": [
+				"null",
+				"string"
+			],
+			"categorical": true
+		}
+	],
+	"version": "1.0"
+}
+
+
+<< Bucket Policy >>
+
+{
+    "Version": "2012-10-17",
+    "Id": "PersonalizeS3BucketAccessPolicy",
+    "Statement": [
+        {
+            "Sid": "PersonalizeS3BucketAccessPolicy",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "personalize.amazonaws.com"
+            },
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::bucket-name",
+                "arn:aws:s3:::bucket-name/*"
+            ]
+        }
+    ]
+}
